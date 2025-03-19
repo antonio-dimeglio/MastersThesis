@@ -17,6 +17,7 @@ def process_slice(
         tol: float=1e-5,
         iterations: int=100,
         disk_size: int=1) -> np.ndarray:    
+    
     img = img / 255.0
     img = rescale_intensity(img)
     img = gaussian(img, sigma=sigma, preserve_range=True)
@@ -26,8 +27,6 @@ def process_slice(
 
     segmented_image = np.invert(cv[0]) + 0  
     segmented_image = binary_closing(segmented_image, disk(disk_size))
-
-    import matplotlib.pyplot as plt 
     
     return segmented_image.astype(np.uint8)*255
 
